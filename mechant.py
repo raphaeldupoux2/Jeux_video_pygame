@@ -1,8 +1,6 @@
 import math
 from random import randint, uniform
 
-import pygame
-
 from acteur import Acteur
 
 
@@ -37,9 +35,7 @@ class Mechant(Acteur):
         self.cible_atteinte = False
         self.limit()
         if self.cible.hidden is False:
-            if self.x < self.cible.x - self.sizeX or self.x > self.cible.x + self.game_instance.player[
-                0].sizeX or self.y < self.cible.y - self.sizeY or self.y > self.cible.y + self.game_instance.player[
-                0].sizeY:
+            if not self.touche(self.cible):
                 self.vel = 0.4
                 self.direction = self.angle_vers(self.cible)
                 self.x += math.cos(self.direction) * self.vel
@@ -48,9 +44,7 @@ class Mechant(Acteur):
                 self.cible_atteinte = True
 
         else:
-            if self.x >= self.cible.x - self.sizeX and self.x <= self.cible.x + self.game_instance.player[
-                0].sizeX and self.y >= self.cible.y - self.sizeY and self.y <= self.cible.y + self.game_instance.player[
-                0].sizeY:
+            if self.touche(self.cible):
                 self.cible_atteinte = True
             self.random_move()
 

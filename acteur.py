@@ -36,3 +36,6 @@ class Acteur(ABC):
     def affiche(self):
         pygame.draw.rect(self.game_instance.win, self.couleur, (self.x, self.y, self.sizeX, self.sizeY))
 
+    def touche(self, acteur):
+        return self.x + self.sizeX > acteur.x > self.x - self.game_instance.player[0].sizeX and \
+            self.y + self.sizeY > acteur.y > self.y - self.game_instance.player[0].sizeY

@@ -1,7 +1,5 @@
 from random import randint
 
-import pygame
-
 from acteur import Acteur
 
 
@@ -11,9 +9,8 @@ class Source(Acteur):
 
     def heal(self, acteur_affecte: list):
         for acteur in acteur_affecte:
-            if acteur.x < self.x + self.sizeX and acteur.x > self.x - self.game_instance.player[0].sizeX and acteur.y < self.y + self.sizeY and acteur.y > self.y - self.game_instance.player[0].sizeY:
+            if self.touche(acteur):
                 acteur.pv += 1
-                # print(acteur.pv)
 
     def comportement(self):
         self.heal(self.game_instance.player)
