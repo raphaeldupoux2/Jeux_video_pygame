@@ -14,16 +14,20 @@ class Acteur(ABC):
     def limit(self):
         if self.x < 0:
             self.x = 0
-        if self.x + self.game_instance.size_playerX > self.game_instance.width:
-            self.x = self.game_instance.width - self.game_instance.size_playerX
+        if self.x + self.game_instance.player[0].sizeX > self.game_instance.width:
+            self.x = self.game_instance.width - self.game_instance.player[0].sizeX
         if self.y < 0:
             self.y = 0
-        if self.y + self.game_instance.size_playerY > self.game_instance.hidth:
-            self.y = self.game_instance.hidth - self.game_instance.size_playerY
+        if self.y + self.game_instance.player[0].sizeY > self.game_instance.hidth:
+            self.y = self.game_instance.hidth - self.game_instance.player[0].sizeY
 
     def prend_degat(self, degat: float):
         self.pv -= degat
 
     @abstractmethod
     def comportement(self):
+        pass
+
+    @abstractmethod
+    def affiche(self):
         pass
