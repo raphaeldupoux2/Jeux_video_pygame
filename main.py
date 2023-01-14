@@ -8,6 +8,8 @@ from mechant import Mechant
 from buisson import Buisson
 from source import Source
 
+BROWN = (120, 80, 35)
+
 pygame.init()
 clock = pygame.time.Clock()
 
@@ -46,14 +48,14 @@ def run(game):
 
 if __name__ == '__main__':
 
-    game = Game_instance("Squarey", 1280, 720)
+    game = Game_instance("Squarey")
     parametre_game(game)
 
     print("start")
     while game.run:
         run(game)
 
-    paradis = Game_instance("Paradis des Bouseux", 1280, 720)
+    paradis = Game_instance("Paradis des Bouseux", color=BROWN)
     parametre_paradis(paradis)
     while paradis.run:
         run(paradis)

@@ -1,11 +1,14 @@
 import pygame
 
+WHITE = (255, 255, 255)
+
 
 class Game_instance:
-    def __init__(self, titre, width, hidth):
+    def __init__(self, titre, width=1280, hidth=720, color=WHITE):
         self.titre = titre
         self.width = width
         self.hidth = hidth
+        self.color = color
         self.win = pygame.display.set_mode((self.width, self.hidth))
         pygame.display.set_caption(self.titre)
         self.run = True
@@ -32,7 +35,7 @@ class Game_instance:
         self.win.blit(text, textRect)
 
     def draw_game(self):
-        self.win.fill((255, 255, 255))
+        self.win.fill(self.color)
         for source in self.source:
             pygame.draw.rect(self.win, (0, 180, 255), (source.x, source.y, self.size_sourceX, self.size_sourceY))
         for mechant in self.mechant:
