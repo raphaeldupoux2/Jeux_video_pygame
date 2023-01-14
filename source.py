@@ -7,9 +7,7 @@ from acteur import Acteur
 
 class Source(Acteur):
     def __init__(self, game_instance):
-        super().__init__(game_instance, randint(300, 1000), randint(200, 450), 0)
-        self.sizeX = 100
-        self.sizeY = 100
+        super().__init__(game_instance, randint(300, 1000), randint(200, 450), 0, 100, 100, (0, 180, 255))
 
     def heal(self, acteur_affecte: list):
         for acteur in acteur_affecte:
@@ -19,6 +17,3 @@ class Source(Acteur):
 
     def comportement(self):
         self.heal(self.game_instance.player)
-
-    def affiche(self):
-        pygame.draw.rect(self.game_instance.win, (0, 180, 255), (self.x, self.y, self.sizeX, self.sizeY))

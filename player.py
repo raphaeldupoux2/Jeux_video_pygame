@@ -5,10 +5,8 @@ from acteur import Acteur
 class Player(Acteur):
 
     def __init__(self, game_instance):
-        super().__init__(game_instance, 100, 100, 0.5)
+        super().__init__(game_instance, 100, 100, 0.5, 20, 20, (0, 0, 255))
         self.hidden = False
-        self.sizeX = 20
-        self.sizeY = 20
         self.dead = False
 
     def move(self):
@@ -39,6 +37,5 @@ class Player(Acteur):
             self.prend_degat(0.01)
 
     def affiche(self):
-        pygame.draw.rect(self.game_instance.win, (0, 0, 255),
-                         (self.x, self.y, self.game_instance.player[0].sizeX, self.game_instance.player[0].sizeY))
+        super().affiche()
         self.game_instance.affiche_pv(self)
