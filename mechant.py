@@ -6,7 +6,7 @@ from acteur import Acteur
 class Mechant(Acteur):
 
     def __init__(self, game_instance, cible):
-        super().__init__(game_instance, randint(300, 1000), randint(200, 450), 0.4)
+        super().__init__(game_instance, randint(300, 1000), randint(200, 550), 0.4)
         self.cible = cible
         self.cible_atteinte = False
         self.direction = uniform(0, 2 * math.pi)
@@ -48,6 +48,3 @@ class Mechant(Acteur):
     def fight(self):
         if self.cible_atteinte:
             self.cible.prend_degat(3)
-
-    def affiche(self):
-        pass

@@ -9,6 +9,7 @@ class Player(Acteur):
         self.hidden = False
         self.sizeX = game_instance.size_playerX
         self.sizeY = game_instance.size_playerY
+        self.dead = False
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -22,13 +23,17 @@ class Player(Acteur):
         if keys[pygame.K_DOWN]:
             self.y += self.vel
 
-    def prend_degat(self, degat: int):
+    def prend_degat(self, degat: float):
         super().prend_degat(degat)
-        if self.pv <= 0:
-            self.game_instance.run = False
+        if not self.dead:
+            if self.pv <= 0:
+                self.game_instance.run = False
+                self.dead = True
+        else:
+            if self.pv <= -1000:
+                self.game_instance.run = False
 
     def comportement(self):
         self.move()
-
-    def affiche(self):
-        pass
+        if self.dead:
+            self.prend_degat(0.01)

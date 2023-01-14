@@ -21,12 +21,9 @@ class Acteur(ABC):
         if self.y + self.game_instance.size_playerY > self.game_instance.hidth:
             self.y = self.game_instance.hidth - self.game_instance.size_playerY
 
-    def prend_degat(self, degat: int):
+    def prend_degat(self, degat: float):
         self.pv -= degat
 
     @abstractmethod
     def comportement(self):
-        pass
-
-    def affiche(self):
         pass

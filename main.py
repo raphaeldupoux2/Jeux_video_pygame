@@ -14,29 +14,6 @@ pygame.init()
 clock = pygame.time.Clock()
 
 
-def parametre_game(game):
-    player1 = Player(game)
-    game.player.append(player1)
-
-    mechant1 = Mechant(game, player1)
-    mechant2 = Mechant(game, player1)
-    game.mechant.append(mechant1)
-    game.mechant.append(mechant2)
-
-    game.etre_vivant = game.mechant + game.player
-
-    buisson1 = Buisson(game)
-    game.buisson.append(buisson1)
-
-    source1 = Source(game)
-    game.source.append(source1)
-
-
-def parametre_paradis(game):
-    player1 = Player(game)
-    game.player.append(player1)
-
-
 def run(game):
     pygame.time.delay(2)
     game.update()
@@ -49,16 +26,35 @@ def run(game):
 if __name__ == '__main__':
 
     game = Game_instance("Squarey")
-    parametre_game(game)
+
+    player1 = Player(game)
+    game.player.append(player1)
+
+    mechant1 = Mechant(game, player1)
+    mechant2 = Mechant(game, player1)
+    game.mechant.append(mechant1)
+    game.mechant.append(mechant2)
+
+    game.etre_vivant = game.mechant + game.player
+
+    buisson1 = Buisson(game)
+    game.buisson.append(buisson1)
+    source1 = Source(game)
+    game.source.append(source1)
 
     print("start")
     while game.run:
         run(game)
 
-    paradis = Game_instance("Paradis des Bouseux", color=BROWN)
-    parametre_paradis(paradis)
-    while paradis.run:
-        run(paradis)
+    # Passage après une mort pitoyable dans Le Paradis des Bouseux ...
+
+    pdb = Game_instance("Paradis des Bouseux", color=BROWN)
+    player1.game_instance = pdb
+    pdb.player.append(player1)
+    pdb.acteurs.append(player1)
+
+    while pdb.run:
+        run(pdb)
 
     # clock.tick(60)
     print("fin")

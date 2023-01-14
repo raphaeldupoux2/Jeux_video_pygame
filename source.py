@@ -16,6 +16,3 @@ class Source(Acteur):
 
     def comportement(self):
         self.heal(self.game_instance.player)
-
-    def affiche(self):
-        pass
