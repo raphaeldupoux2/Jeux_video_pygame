@@ -12,7 +12,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 
-def parametre(game):
+def parametre_game(game):
     player1 = Player(game)
     game.player.append(player1)
 
@@ -30,22 +30,33 @@ def parametre(game):
     game.source.append(source1)
 
 
+def parametre_paradis(game):
+    player1 = Player(game)
+    game.player.append(player1)
+
+
 def run(game):
-    print("start")
-    while game.run:
-        pygame.time.delay(2)
-        game.update()
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
+    pygame.time.delay(2)
+    game.update()
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
 
 
 if __name__ == '__main__':
 
     game = Game_instance("Squarey", 1280, 720)
-    parametre(game)
-    run(game)
+    parametre_game(game)
+
+    print("start")
+    while game.run:
+        run(game)
+
+    paradis = Game_instance("Paradis des Bouseux", 1280, 720)
+    parametre_paradis(paradis)
+    while paradis.run:
+        run(paradis)
 
     # clock.tick(60)
     print("fin")

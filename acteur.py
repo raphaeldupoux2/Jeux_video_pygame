@@ -27,3 +27,6 @@ class Acteur(ABC):
     @abstractmethod
     def comportement(self):
         pass
+
+    def affiche(self):
+        pass

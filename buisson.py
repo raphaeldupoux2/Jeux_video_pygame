@@ -18,3 +18,5 @@ class Buisson(Acteur):
     def comportement(self):
         self.hide(self.game_instance.etre_vivant)
 
+    def affiche(self):
+        pass

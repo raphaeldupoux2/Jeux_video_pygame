@@ -29,3 +29,6 @@ class Player(Acteur):
 
     def comportement(self):
         self.move()
+
+    def affiche(self):
+        pass

@@ -48,3 +48,6 @@ class Mechant(Acteur):
     def fight(self):
         if self.cible_atteinte:
             self.cible.prend_degat(3)
+
+    def affiche(self):
+        pass

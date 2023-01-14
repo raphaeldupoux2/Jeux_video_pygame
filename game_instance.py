@@ -49,3 +49,6 @@ class Game_instance:
         for acteur in self.acteurs:
             acteur.comportement()
         self.draw_game()
+
+    def affiche(self):
+        pass
