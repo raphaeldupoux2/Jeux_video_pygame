@@ -1,3 +1,5 @@
+import random
+
 import pygame
 from acteur import Acteur
 
@@ -33,7 +35,22 @@ class Player(Acteur):
             if self.pv <= -1000:
                 self.game_instance.run = False
 
+    def dig(self):
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if pygame.key.get_focused() and pygame.key.get_pressed()[pygame.K_SPACE]:
+                    print("digging")
+                    dug = random.randint(0, 100)
+                    if dug == 0:
+                        print("Vous avez un point de destin !")
+                        self.pv = 1000
+                        self.game_instance.run = False
+                        self.dead = False
+                    else:
+                        print("De la merde, toujours de la merde")
+
     def comportement(self):
         self.move()
         if self.dead:
             self.prend_degat(0.01)
+            self.dig()
