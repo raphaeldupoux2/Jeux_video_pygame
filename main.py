@@ -27,8 +27,15 @@ if __name__ == '__main__':
 
     game = Game_instance("Squarey")
 
+    # Le décors est créé en premier pour qu'il soit à l'arrière plan.
+    buisson1 = Buisson(game)
+    game.buisson.append(buisson1)
+    source1 = Source(game)
+    game.source.append(source1)
+
     player1 = Player(game)
     game.player.append(player1)
+
 
     mechant1 = Mechant(game, player1)
     mechant2 = Mechant(game, player1)
@@ -37,10 +44,7 @@ if __name__ == '__main__':
 
     game.etre_vivant = game.mechant + game.player
 
-    buisson1 = Buisson(game)
-    game.buisson.append(buisson1)
-    source1 = Source(game)
-    game.source.append(source1)
+
 
     print("start")
     while game.run:

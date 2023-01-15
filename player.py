@@ -7,10 +7,8 @@ from acteur import Acteur
 class Player(Acteur):
 
     def __init__(self, game_instance):
-        super().__init__(game_instance, 100, 100, 0.5)
+        super().__init__(game_instance, 100, 100, 0.5, 20, 20, (0, 0, 255))
         self.hidden = False
-        self.sizeX = game_instance.size_playerX
-        self.sizeY = game_instance.size_playerY
         self.dead = False
 
     def move(self):
@@ -54,3 +52,7 @@ class Player(Acteur):
         if self.dead:
             self.prend_degat(0.01)
             self.dig()
+
+    def affiche(self):
+        super().affiche()
+        self.game_instance.affiche_pv(self)
