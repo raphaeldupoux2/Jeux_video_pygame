@@ -57,8 +57,14 @@ if __name__ == '__main__':
     pdb.player.append(player1)
     pdb.acteurs.append(player1)
 
-    while pdb.run:
-        run(pdb)
+    while True:
+        player1.game_instance = pdb
+        while pdb.run:
+            run(pdb)
+
+        player1.game_instance = game
+        while game.run:
+            run(game)
 
     # clock.tick(60)
     print("fin")
