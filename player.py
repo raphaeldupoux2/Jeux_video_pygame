@@ -1,3 +1,4 @@
+import math
 import random
 
 import pygame
@@ -7,7 +8,7 @@ from acteur import Acteur
 class Player(Acteur):
 
     def __init__(self, game_instance):
-        super().__init__(game_instance, 100, 100, 0.5, 20, 20, (0, 0, 255))
+        super().__init__(game_instance, 100, 100, 0.5, 20, 20, (0, 0, 255), True)
         self.hidden = False
         self.dead = False
 
@@ -15,13 +16,17 @@ class Player(Acteur):
         keys = pygame.key.get_pressed()
         self.limit()
         if keys[pygame.K_LEFT]:
-            self.x -= self.vel
+            self.direction = math.pi
+            self.bouge()
         if keys[pygame.K_RIGHT]:
-            self.x += self.vel
+            self.direction = 0
+            self.bouge()
         if keys[pygame.K_UP]:
-            self.y -= self.vel
+            self.direction = - math.pi / 2
+            self.bouge()
         if keys[pygame.K_DOWN]:
-            self.y += self.vel
+            self.direction = math.pi / 2
+            self.bouge()
 
     def prend_degat(self, degat: float):
         super().prend_degat(degat)
