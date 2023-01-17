@@ -29,22 +29,12 @@ if __name__ == '__main__':
 
     # Le décors est créé en premier pour qu'il soit à l'arrière plan.
     buisson1 = Buisson(game)
-    game.buisson.append(buisson1)
+    buisson2 = Buisson(game)
     source1 = Source(game)
-    game.source.append(source1)
-
     player1 = Player(game)
-    game.player.append(player1)
-
-
+    game.players.append(player1)
     mechant1 = Mechant(game, player1)
     mechant2 = Mechant(game, player1)
-    game.mechant.append(mechant1)
-    game.mechant.append(mechant2)
-
-    game.etre_vivant = game.mechant + game.player
-
-
 
     print("start")
     while game.run:
@@ -54,8 +44,6 @@ if __name__ == '__main__':
 
     pdb = Game_instance("Paradis des Bouseux", color=BROWN)
     player1.game_instance = pdb
-    pdb.player.append(player1)
-    pdb.acteurs.append(player1)
 
     while True:
         player1.game_instance = pdb

@@ -4,6 +4,7 @@ WHITE = (255, 255, 255)
 
 
 class Game_instance:
+
     def __init__(self, titre, width=1280, hidth=720, color=WHITE):
         self.titre = titre
         self.width = width
@@ -12,12 +13,24 @@ class Game_instance:
         self.win = pygame.display.set_mode((self.width, self.hidth))
         pygame.display.set_caption(self.titre)
         self.run = True
-        self.player = []
-        self.mechant = []
-        self.buisson = []
-        self.source = []
-        self.etre_vivant = self.mechant + self.player
         self.acteurs = []
+        self.players = []
+        self.vivants_save = None
+        self.solides_save = None
+
+    @property
+    def vivants(self):
+        if self.vivants_save is not None:
+            return self.vivants_save
+
+        return filter(lambda x: x.vivant, self.acteurs)
+
+    @property
+    def solides(self):
+        if self.solides_save is not None:
+            return self.solides_save
+
+        return filter(lambda x: x.solide, self.acteurs)
 
     def affiche_pv(self, acteur):
         font = pygame.font.Font('freesansbold.ttf', 16)
@@ -34,6 +47,9 @@ class Game_instance:
         pygame.display.update()
 
     def update(self):
+        for acteur in self.acteurs:
+            acteur.hidden = False
+
         for acteur in self.acteurs:
             acteur.comportement()
 

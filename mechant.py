@@ -7,7 +7,7 @@ from acteur import Acteur
 class Mechant(Acteur):
 
     def __init__(self, game_instance, cible):
-        super().__init__(game_instance, randint(300, 1000), randint(200, 550), 0.4, 40, 40, (255, 0, 0), True)
+        super().__init__(game_instance, randint(300, 1000), randint(200, 550), 0.4, 40, 40, (255, 0, 0), True, True)
         self.cible = cible
         self.cible_atteinte = False
         self.hidden = False
@@ -31,7 +31,6 @@ class Mechant(Acteur):
 
     def move(self):
         self.cible_atteinte = False
-        self.limit()
         if self.cible.hidden is False:
             if not self.touche(self.cible, marge=1):
                 self.vel = 0.4
