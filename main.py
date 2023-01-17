@@ -1,3 +1,5 @@
+from random import randint
+
 import pygame
 import sys
 from pygame.locals import *
@@ -6,6 +8,7 @@ from game_instance import Game_instance
 from player import Player
 from mechant import Mechant
 from buisson import Buisson
+from rocher import Rocher
 from source import Source
 
 BROWN = (120, 80, 35)
@@ -28,6 +31,13 @@ if __name__ == '__main__':
     game = Game_instance("Squarey")
 
     # Le décors est créé en premier pour qu'il soit à l'arrière plan.
+
+    for i in range(20):
+        rocher = Rocher(game, randint(0, 1200), randint(0, 700))
+        ligne_rocher = Rocher(game, 20 * i, 500)
+        ligne_rocher2 = Rocher(game, 500, 20 * i)
+        game.rocher.append(rocher).append(ligne_rocher2).append(ligne_rocher2)
+    source1 = Source(game)
     buisson1 = Buisson(game)
     game.buisson.append(buisson1)
     source1 = Source(game)
@@ -44,8 +54,6 @@ if __name__ == '__main__':
 
     game.etre_vivant = game.mechant + game.player
 
-
-
     print("start")
     while game.run:
         run(game)
@@ -59,10 +67,12 @@ if __name__ == '__main__':
 
     while True:
         player1.game_instance = pdb
+        pdb.run = True
         while pdb.run:
             run(pdb)
 
         player1.game_instance = game
+        game.run = True
         while game.run:
             run(game)
 

@@ -16,6 +16,7 @@ class Game_instance:
         self.mechant = []
         self.buisson = []
         self.source = []
+        self.rocher = []
         self.etre_vivant = self.mechant + self.player
         self.acteurs = []
 
