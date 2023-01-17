@@ -37,8 +37,16 @@ class Acteur(ABC):
     def comportement(self):
         pass
 
+    @property
+    def x_rel(self):
+        return self.x - self.game_instance.camera.x
+
+    @property
+    def y_rel(self):
+        return self.y - self.game_instance.camera.y
+
     def affiche(self):
-        pygame.draw.rect(self.game_instance.win, self.couleur, (self.x, self.y, self.sizeX, self.sizeY))
+        pygame.draw.rect(self.game_instance.win, self.couleur, (self.x_rel, self.y_rel, self.sizeX, self.sizeY))
 
     def touche(self, acteur, marge=0):
         return acteur.x < self.x + self.sizeX + marge and self.x - marge < acteur.x + acteur.sizeX and \
