@@ -33,6 +33,7 @@ if __name__ == '__main__':
     source1 = Source(game)
     player1 = Player(game)
     game.players.append(player1)
+    game.camera.cible = player1
     mechant1 = Mechant(game, player1)
     mechant2 = Mechant(game, player1)
 
