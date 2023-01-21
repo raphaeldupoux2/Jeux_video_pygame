@@ -16,6 +16,8 @@ class Acteur(ABC):
         self.pv = 1000
         self.sizeX = sizeX
         self.sizeY = sizeY
+        self.centreX = self.x - self.sizeX
+        self.centreY = self.y - self.sizeY
         self.couleur = couleur
         self.solide = solide
         self.direction = uniform(0, 2 * math.pi)
@@ -42,7 +44,14 @@ class Acteur(ABC):
 
     def touche(self, acteur, marge=0):
         return acteur.x < self.x + self.sizeX + marge and self.x - marge < acteur.x + acteur.sizeX and \
-            acteur.y < self.y + self.sizeY + marge and self.y - marge < acteur.y + acteur.sizeY
+               acteur.y < self.y + self.sizeY + marge and self.y - marge < acteur.y + acteur.sizeY
+
+    def distance(self, acteur):
+        distance = (self.x - acteur.x) ** 2 + (self.y - acteur.y) ** 2
+        distanceX = self.x - acteur.x
+        distanceY = self.y - acteur.x
+        print(distanceX, distanceY)
+        return distanceX, distanceY
 
     def _bouge(self):
         self.x += math.cos(self.direction) * self.vel
@@ -68,3 +77,11 @@ class Acteur(ABC):
 
                 self.x = old_x
                 break
+
+            # if abs(self.centreX - sol.centreX) < self.sizeX / 2 + sol.sizeX / 2 or abs(self.centreY - sol.centreY) < self.sizeY / 2 + sol.sizeY / 2:
+            #     print("je suis bloqué dans un solide")
+            #     self.couleur = (0, 0, 0)
+                # self.solide = False
+
+            # else:
+            #     self.solide = True

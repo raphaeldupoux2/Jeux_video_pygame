@@ -32,20 +32,26 @@ if __name__ == '__main__':
 
     # Le décors est créé en premier pour qu'il soit à l'arrière plan.
 
+    source1 = Source(game)
+    # source2 = Source(game)
+    buisson1 = Buisson(game)
+    buisson2 = Buisson(game)
+    game.buisson.append(buisson1)
+    game.buisson.append(buisson2)
+    game.source.append(source1)
+    # game.source.append(source2)
+
     for i in range(20):
-        rocher = Rocher(game, randint(0, 1200), randint(0, 700))
+        rocher1 = Rocher(game, randint(0, 1200), randint(0, 700), randint(20, 100), randint(20, 100))
+        # gros_rocher = Rocher(game, 700, 500, 200, 200)
         ligne_rocher = Rocher(game, 20 * i, 500)
         ligne_rocher2 = Rocher(game, 500, 20 * i)
-        game.rocher.append(rocher).append(ligne_rocher2).append(ligne_rocher2)
-    source1 = Source(game)
-    buisson1 = Buisson(game)
-    game.buisson.append(buisson1)
-    source1 = Source(game)
-    game.source.append(source1)
+        game.rocher.append(rocher1)
+        game.rocher.append(ligne_rocher)
+        game.rocher.append(ligne_rocher2)
 
     player1 = Player(game)
     game.player.append(player1)
-
 
     mechant1 = Mechant(game, player1)
     mechant2 = Mechant(game, player1)
