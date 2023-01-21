@@ -36,10 +36,12 @@ if __name__ == '__main__':
     # source2 = Source(game)
     buisson1 = Buisson(game)
     buisson2 = Buisson(game)
-    game.buisson.append(buisson1)
-    game.buisson.append(buisson2)
-    game.source.append(source1)
-    # game.source.append(source2)
+    source1 = Source(game)
+    player1 = Player(game)
+    game.players.append(player1)
+    game.camera.cible = player1
+    mechant1 = Mechant(game, player1)
+    mechant2 = Mechant(game, player1)
 
     for i in range(20):
         rocher1 = Rocher(game, randint(0, 1200), randint(0, 700), randint(20, 100), randint(20, 100))
@@ -50,16 +52,6 @@ if __name__ == '__main__':
         game.rocher.append(ligne_rocher)
         game.rocher.append(ligne_rocher2)
 
-    player1 = Player(game)
-    game.player.append(player1)
-
-    mechant1 = Mechant(game, player1)
-    mechant2 = Mechant(game, player1)
-    game.mechant.append(mechant1)
-    game.mechant.append(mechant2)
-
-    game.etre_vivant = game.mechant + game.player
-
     print("start")
     while game.run:
         run(game)
@@ -68,8 +60,6 @@ if __name__ == '__main__':
 
     pdb = Game_instance("Paradis des Bouseux", color=BROWN)
     player1.game_instance = pdb
-    pdb.player.append(player1)
-    pdb.acteurs.append(player1)
 
     while True:
         player1.game_instance = pdb

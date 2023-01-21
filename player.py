@@ -8,13 +8,11 @@ from acteur import Acteur
 class Player(Acteur):
 
     def __init__(self, game_instance):
-        super().__init__(game_instance, 100, 100, 0.5, 20, 20, (0, 0, 255), True)
-        self.hidden = False
+        super().__init__(game_instance, 100, 100, 0.5, 20, 20, (0, 0, 255), True, True)
         self.dead = False
 
     def move(self):
         keys = pygame.key.get_pressed()
-        self.limit()
         if keys[pygame.K_LEFT]:
             self.direction = math.pi
             self.bouge()

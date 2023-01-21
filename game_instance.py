@@ -1,9 +1,12 @@
 import pygame
 
+from camera import Camera
+
 WHITE = (255, 255, 255)
 
 
 class Game_instance:
+
     def __init__(self, titre, width=1280, hidth=720, color=WHITE):
         self.titre = titre
         self.width = width
@@ -12,19 +15,31 @@ class Game_instance:
         self.win = pygame.display.set_mode((self.width, self.hidth))
         pygame.display.set_caption(self.titre)
         self.run = True
-        self.player = []
-        self.mechant = []
-        self.buisson = []
-        self.source = []
-        self.rocher = []
-        self.etre_vivant = self.mechant + self.player
         self.acteurs = []
+        self.players = []
+        self.vivants_save = None
+        self.solides_save = None
+        self.camera = Camera(self, 100, 100)
+
+    @property
+    def vivants(self):
+        if self.vivants_save is not None:
+            return self.vivants_save
+
+        return filter(lambda x: x.vivant, self.acteurs)
+
+    @property
+    def solides(self):
+        if self.solides_save is not None:
+            return self.solides_save
+
+        return filter(lambda x: x.solide, self.acteurs)
 
     def affiche_pv(self, acteur):
         font = pygame.font.Font('freesansbold.ttf', 16)
         text = font.render(str(round(acteur.pv)), True, (0, 0, 0))
         textRect = text.get_rect()
-        textRect.center = (acteur.x + 10, acteur.y - 10)
+        textRect.center = (acteur.x_rel + 10, acteur.y_rel - 10)
         self.win.blit(text, textRect)
 
     def draw_game(self):
@@ -36,7 +51,9 @@ class Game_instance:
 
     def update(self):
         for acteur in self.acteurs:
+            acteur.hidden = False
+
+        for acteur in self.acteurs:
             acteur.comportement()
 
         self.draw_game()
-
