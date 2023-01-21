@@ -1,3 +1,5 @@
+import math
+
 import pygame
 
 from camera import Camera
@@ -17,22 +19,14 @@ class Game_instance:
         self.run = True
         self.acteurs = []
         self.players = []
-        self.vivants_save = None
-        self.solides_save = None
         self.camera = Camera(self, 100, 100)
 
     @property
     def vivants(self):
-        if self.vivants_save is not None:
-            return self.vivants_save
-
         return filter(lambda x: x.vivant, self.acteurs)
 
     @property
     def solides(self):
-        if self.solides_save is not None:
-            return self.solides_save
-
         return filter(lambda x: x.solide, self.acteurs)
 
     def affiche_pv(self, acteur):

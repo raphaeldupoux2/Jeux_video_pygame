@@ -48,9 +48,6 @@ if __name__ == '__main__':
         # gros_rocher = Rocher(game, 700, 500, 200, 200)
         ligne_rocher = Rocher(game, 20 * i, 500)
         ligne_rocher2 = Rocher(game, 500, 20 * i)
-        game.rocher.append(rocher1)
-        game.rocher.append(ligne_rocher)
-        game.rocher.append(ligne_rocher2)
 
     print("start")
     while game.run:

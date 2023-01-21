@@ -53,6 +53,9 @@ class Acteur(ABC):
         print(distanceX, distanceY)
         return distanceX, distanceY
 
+    def angle_vers(self, cible):
+        return math.atan2(cible.y - self.y, cible.x - self.x)
+
     def _bouge(self):
         self.x += math.cos(self.direction) * self.vel
         self.y += math.sin(self.direction) * self.vel

@@ -21,9 +21,6 @@ class Mechant(Acteur):
         super().affiche()
         self.game_instance.affiche_pv(self)
 
-    def angle_vers(self, cible: Acteur):
-        return math.atan2(cible.y - self.y, cible.x - self.x)
-
     def random_move(self):
         self.vel = 0.1
         self.direction += uniform(-math.pi / 48, math.pi / 48)
