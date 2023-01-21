@@ -30,11 +30,12 @@ class Player(Acteur):
         super().prend_degat(degat)
         if not self.dead:
             if self.pv <= 0:
-                self.game_instance.run = False
+                self.game_instance.rejoint_monde(self.game_instance.paradis_des_bouseux)
                 self.dead = True
         else:
             if self.pv <= -1000:
-                self.game_instance.run = False
+                self.pv = 1000
+                self.game_instance.rejoint_monde(self.game_instance.monde_normal)
 
     def dig(self):
         for event in pygame.event.get():

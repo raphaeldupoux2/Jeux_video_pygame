@@ -4,8 +4,8 @@ from acteur import Acteur
 
 
 class Source(Acteur):
-    def __init__(self, game_instance):
-        super().__init__(game_instance, randint(300, 1000), randint(200, 450), 0, 100, 100, (0, 180, 255), False, True)
+    def __init__(self, game_instance, x=0, y=0):
+        super().__init__(game_instance, x, y, 0, 100, 100, (0, 180, 255), False, True)
 
     def heal(self, acteur):
         if self.touche(acteur):

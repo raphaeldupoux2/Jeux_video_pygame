@@ -3,23 +3,43 @@ import math
 import pygame
 
 from camera import Camera
-
-WHITE = (255, 255, 255)
+from monde.monde_normal import MondeNormal
+from monde.paradis_des_bouseux import ParadisDesBouseux
+from player import Player
 
 
 class Game_instance:
 
-    def __init__(self, titre, width=1280, hidth=720, color=WHITE):
+    def __init__(self, titre, width=1280, hidth=720):
         self.titre = titre
         self.width = width
         self.hidth = hidth
-        self.color = color
+        self.color = (0, 0, 0)
         self.win = pygame.display.set_mode((self.width, self.hidth))
         pygame.display.set_caption(self.titre)
         self.run = True
+        self.monde_normal = MondeNormal(self)
+        self.paradis_des_bouseux = ParadisDesBouseux(self)
         self.acteurs = []
-        self.players = []
-        self.camera = Camera(self, 100, 100)
+        self.monde_normal.spawn_terrain()
+        self.paradis_des_bouseux.spawn_terrain()
+        player1 = Player(self)
+        self.players = [player1]
+        self.camera = Camera(self, 100, 100, cible=player1)
+        self.monde_normal.spawn_mobs()
+        self.monde_normal.rentre()
+        self.monde = None
+        self.rejoint_monde(self.monde_normal)
+
+    def rejoint_monde(self, monde):
+        if self.monde is not None:
+            self.monde.sort()
+
+        self.monde = monde
+        self.monde.rentre()
+
+    def init_game(self):
+        pass
 
     @property
     def vivants(self):

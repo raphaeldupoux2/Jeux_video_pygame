@@ -3,9 +3,9 @@ from acteur import Acteur
 
 class Camera(Acteur):
 
-    def __init__(self, game_instance, x, y):
+    def __init__(self, game_instance, x, y, cible=None):
         super().__init__(game_instance, x, y, 0, 0, 0, (0, 0, 0), False, False)
-        self.cible = None
+        self.cible = cible
 
     def comportement(self):
         if self.cible is not None:
