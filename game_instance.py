@@ -1,5 +1,7 @@
 import pygame
 
+from camera import Camera
+
 WHITE = (255, 255, 255)
 
 
@@ -18,12 +20,13 @@ class Game_instance:
         self.source = []
         self.etre_vivant = self.mechant + self.player
         self.acteurs = []
+        self.camera = Camera(self, 100, 100)
 
     def affiche_pv(self, acteur):
         font = pygame.font.Font('freesansbold.ttf', 16)
         text = font.render(str(round(acteur.pv)), True, (0, 0, 0))
         textRect = text.get_rect()
-        textRect.center = (acteur.x + 10, acteur.y - 10)
+        textRect.center = (acteur.x_rel + 10, acteur.y_rel - 10)
         self.win.blit(text, textRect)
 
     def draw_game(self):
@@ -38,4 +41,3 @@ class Game_instance:
             acteur.comportement()
 
         self.draw_game()
-

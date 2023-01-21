@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
     player1 = Player(game)
     game.player.append(player1)
-
+    game.camera.cible = player1
 
     mechant1 = Mechant(game, player1)
     mechant2 = Mechant(game, player1)
