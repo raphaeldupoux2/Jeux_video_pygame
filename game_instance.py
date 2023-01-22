@@ -18,32 +18,32 @@ class Game_instance:
         self.win = pygame.display.set_mode((self.width, self.hidth))
         pygame.display.set_caption(self.titre)
         self.run = True
+        self.acteurs = []
         self.monde_normal = MondeNormal(self)
         self.paradis_des_bouseux = ParadisDesBouseux(self)
-        self.acteurs = []
-        self.monde_normal.spawn_terrain()
-        self.paradis_des_bouseux.spawn_terrain()
         player1 = Player(self)
         self.players = [player1]
         self.camera = Camera(self, 100, 100, cible=player1)
-        self.monde_normal.spawn_mobs()
-        self.monde_normal.rentre()
         self.monde = None
         self.rejoint_monde(self.monde_normal)
 
     def rejoint_monde(self, monde):
         if self.monde is not None:
-            self.monde.sort()
+            self.monde.desactive()
 
         self.monde = monde
-        self.monde.rentre()
+        self.monde.active()
 
     def init_game(self):
-        pass
+        self.monde_normal.spawn_mobs()
 
     @property
     def vivants(self):
         return filter(lambda x: x.vivant, self.acteurs)
+
+    @property
+    def non_vivants(self):
+        return filter(lambda x: not x.vivant, self.acteurs)
 
     @property
     def solides(self):
@@ -67,7 +67,10 @@ class Game_instance:
         for acteur in self.acteurs:
             acteur.hidden = False
 
-        for acteur in self.acteurs:
+        for acteur in self.non_vivants:
+            acteur.comportement()
+
+        for acteur in self.vivants:
             acteur.comportement()
 
         self.draw_game()

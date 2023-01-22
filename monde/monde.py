@@ -12,7 +12,7 @@ class Monde(ABC):
 
     @abstractmethod
     def spawn_terrain(self):
-        self.sort()
+        pass
 
     @abstractmethod
     def spawn_mobs(self):
@@ -26,10 +26,13 @@ class Monde(ABC):
             terrain = object(self.game_instance, x=randint(-1000, 1000), y=randint(-1000, 1000))
             self.terrains.append(terrain)
 
-    def sort(self):
+    def desactive(self):
         for terrain in self.terrains:
-            self.game_instance.acteurs.remove(terrain)
+            if terrain in self.game_instance.acteurs:
+                self.game_instance.acteurs.remove(terrain)
 
-    def rentre(self):
-        self.game_instance.acteurs += self.terrains
+    def active(self):
+        for terrain in self.terrains:
+            if terrain not in self.game_instance.acteurs:
+                self.game_instance.acteurs.append(terrain)
 
