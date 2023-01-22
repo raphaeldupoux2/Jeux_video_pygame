@@ -1,3 +1,4 @@
+from bouse import Bouse
 from buisson import Buisson
 from mechant import Mechant
 from monde.monde import Monde
@@ -14,7 +15,7 @@ class ParadisDesBouseux(Monde):
         self.spawn_terrain()
 
     def spawn_terrain(self):
-        self.random_spawn(Rocher, 4000)
+        self.random_spawn(Bouse, 60)
         self.desactive()
 
     def spawn_mobs(self):

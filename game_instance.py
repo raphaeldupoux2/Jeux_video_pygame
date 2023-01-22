@@ -19,6 +19,7 @@ class Game_instance:
         pygame.display.set_caption(self.titre)
         self.run = True
         self.acteurs = []
+        self.solides = []
         self.monde_normal = MondeNormal(self)
         self.paradis_des_bouseux = ParadisDesBouseux(self)
         player1 = Player(self)
@@ -33,9 +34,14 @@ class Game_instance:
 
         self.monde = monde
         self.monde.active()
+        self.reset_solides()
 
     def init_game(self):
         self.monde_normal.spawn_mobs()
+        self.reset_solides()
+
+    def reset_solides(self):
+        self.solides = list(filter(lambda x: x.solide, self.acteurs))
 
     @property
     def vivants(self):
@@ -44,10 +50,6 @@ class Game_instance:
     @property
     def non_vivants(self):
         return filter(lambda x: not x.vivant, self.acteurs)
-
-    @property
-    def solides(self):
-        return filter(lambda x: x.solide, self.acteurs)
 
     def affiche_pv(self, acteur):
         font = pygame.font.Font('freesansbold.ttf', 16)
@@ -61,11 +63,15 @@ class Game_instance:
         for acteur in self.acteurs:
             acteur.affiche()
 
+        self.players[0].affiche()
         pygame.display.update()
 
     def update(self):
         for acteur in self.acteurs:
             acteur.hidden = False
+
+        if self.monde == self.paradis_des_bouseux:
+            self.players[0].prend_degat(1)
 
         for acteur in self.non_vivants:
             acteur.comportement()

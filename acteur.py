@@ -20,12 +20,18 @@ class Acteur(ABC):
         self.centreY = self.y - self.sizeY
         self.couleur = couleur
         self.solide = solide
+        self.game_instance.reset_solides()
         self.vivant = vivant
         self.direction = uniform(0, 2 * math.pi)
         self.hidden = False
 
     def prend_degat(self, degat: float):
         self.pv -= degat
+
+    def set_solide(self, solide):
+        if self.solide != solide:
+            self.solide = solide
+            self.game_instance.reset_solides()
 
     @abstractmethod
     def comportement(self):

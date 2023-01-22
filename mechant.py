@@ -35,4 +35,4 @@ class Mechant(Acteur):
 
     def fight(self):
         if self.touche(self.cible, marge=1):
-            self.cible.prend_degat(10)
+            self.cible.prend_degat(3)

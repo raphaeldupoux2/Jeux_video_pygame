@@ -9,6 +9,7 @@ class Monde(ABC):
     def __init__(self, game_instance):
         self.game_instance = game_instance
         self.terrains = []
+        self.mobs = []
 
     @abstractmethod
     def spawn_terrain(self):
@@ -31,8 +32,16 @@ class Monde(ABC):
             if terrain in self.game_instance.acteurs:
                 self.game_instance.acteurs.remove(terrain)
 
+        for mob in self.mobs:
+            if mob in self.game_instance.acteurs:
+                self.game_instance.acteurs.remove(mob)
+
     def active(self):
         for terrain in self.terrains:
             if terrain not in self.game_instance.acteurs:
                 self.game_instance.acteurs.append(terrain)
+
+        for mob in self.mobs:
+            if mob not in self.game_instance.acteurs:
+                self.game_instance.acteurs.append(mob)
 

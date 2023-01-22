@@ -22,6 +22,7 @@ class MondeNormal(Monde):
     def spawn_mobs(self):
         mechant1 = Mechant(self.game_instance, self.game_instance.players[0])
         mechant2 = Mechant(self.game_instance, self.game_instance.players[0])
+        self.mobs += [mechant1, mechant2]
 
     def active(self):
         super().active()
